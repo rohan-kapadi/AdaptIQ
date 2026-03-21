@@ -2,7 +2,7 @@
   <img src="frontend/src/assets/Logo.png" alt="AdaptIQ logo" width="120" />
 </p>
 
-<h1 align="center">AdaptIQ (SKANA)</h1>
+<h1 align="center">AdaptIQ</h1>
 
 <p align="center">
   Skill Gap Analyzer + Adaptive Upskilling Roadmap
@@ -22,8 +22,6 @@
 </p>
 
 Upload your resume and a job description. AdaptIQ compares skills, surfaces gaps, and generates an actionable learning plan — with a diagnostic quiz and a shareable PDF report.
-
-![AdaptIQ UI](frontend/src/assets/image.png)
 
 ## Why this exists
 
@@ -47,6 +45,13 @@ Most job seekers don’t fail because they lack talent — they fail because the
 - Backend: Flask, MongoDB (PyMongo), Groq LLM, PyPDF2, python-docx, scikit-learn
 - Deployment: Vercel configs included (`vercel.json`, `backend/vercel.json`)
 
+## Dependencies
+
+Full lists live in `frontend/package.json` and `backend/requirements.txt`. Key dependencies:
+
+- Frontend: `react`, `react-router-dom`, `axios`, `chart.js` + `react-chartjs-2`, `tailwindcss`, `jspdf`, `qrcode`, `html2canvas`
+- Backend: `Flask`, `Flask-Cors`, `pymongo`, `python-dotenv`, `groq`, `PyPDF2`, `python-docx`, `pandas`, `scikit-learn`, `neattext`
+
 ## Architecture (high level)
 
 ```mermaid
@@ -60,6 +65,19 @@ flowchart LR
   UI -->|export report| PDF[jsPDF + QRCode]
   API -->|course link| REC[TF‑IDF Similarity (sampled_data.csv)]
 ```
+
+## Skill-gap analysis logic (high level)
+
+1. Parse inputs: the backend receives `resume` + `job_description`, extracts text (PDF via `PyPDF2`, DOCX via `python-docx`, or plain text fallback).
+2. Extract skills with AI: the backend prompts the Groq model to return a strict JSON object containing:
+   - `skills_from_resume`
+   - `skills_required_in_job`
+   - `matching_skills`
+   - `skills_to_improve`
+3. Validate + return: JSON is parsed/validated and returned to the frontend.
+4. Score + visualize: the UI derives match/fit scores from the counts and renders dashboards, the dependency graph, and the learning roadmap.
+5. Recommend resources: `/recommend_course` uses TF‑IDF + cosine similarity over `backend/sampled_data.csv` to output a best-match Udemy course link.
+6. Optional diagnostic quiz: `/generate-quiz` generates a skill-tagged quiz from the job description; the UI grades results and maps them into the same “skills required / gaps” shape.
 
 ## Quickstart (local)
 
@@ -152,22 +170,22 @@ curl -X POST "http://localhost:5000/generate-quiz" -F "job_description=@./jd.pdf
 
 ### Backend (`backend/.env`)
 
-| Variable | Required | Description |
-|---|---:|---|
-| `MONGODB_URI` | Yes | MongoDB connection string (recommended) |
-| `connec_string` | No | Legacy fallback for MongoDB URI (prefer `MONGODB_URI`) |
-| `MONGODB_DB` | No | Database name (default: `UserTest`) |
-| `MONGODB_AUTH_SOURCE` | No | Auth DB if your user isn’t on the default auth DB |
-| `groq_api` | Yes | Groq API key |
-| `GROQ_MODEL` | No | Model name (default: `llama-3.1-8b-instant`) |
-| `PORT` | No | Flask port (default: `5000`) |
-| `FLASK_DEBUG` | No | Set `1` to enable debug (default: `1`) |
+| Variable              | Required | Description                                            |
+| --------------------- | -------: | ------------------------------------------------------ |
+| `MONGODB_URI`         |      Yes | MongoDB connection string (recommended)                |
+| `connec_string`       |       No | Legacy fallback for MongoDB URI (prefer `MONGODB_URI`) |
+| `MONGODB_DB`          |       No | Database name (default: `UserTest`)                    |
+| `MONGODB_AUTH_SOURCE` |       No | Auth DB if your user isn’t on the default auth DB      |
+| `groq_api`            |      Yes | Groq API key                                           |
+| `GROQ_MODEL`          |       No | Model name (default: `llama-3.1-8b-instant`)           |
+| `PORT`                |       No | Flask port (default: `5000`)                           |
+| `FLASK_DEBUG`         |       No | Set `1` to enable debug (default: `1`)                 |
 
 ### Frontend (`frontend/.env`)
 
-| Variable | Required | Description |
-|---|---:|---|
-| `VITE_API_BASE_URL` | No | Backend URL (default: `http://localhost:5000`) |
+| Variable            | Required | Description                                    |
+| ------------------- | -------: | ---------------------------------------------- |
+| `VITE_API_BASE_URL` |       No | Backend URL (default: `http://localhost:5000`) |
 
 ## API endpoints (backend)
 
