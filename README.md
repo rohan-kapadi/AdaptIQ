@@ -22,8 +22,6 @@
 
 Upload your resume and a job description. AdaptIQ compares skills, surfaces gaps, and generates an actionable learning plan with a diagnostic quiz and a shareable PDF report.
 
-![AdaptIQ UI](frontend/src/assets/image.png)
-
 ## Why this exists
 
 Most job seekers don't fail because they lack talent; they fail because they don't know what to learn next. AdaptIQ turns a vague "upskill" goal into a prioritized roadmap with measurable progress.
@@ -249,22 +247,22 @@ From `frontend/`:
 
 ### Backend (`backend/.env`)
 
-| Variable | Required | Description |
-|---|---:|---|
-| `MONGODB_URI` | Yes | MongoDB connection string (recommended) |
-| `connec_string` | No | Legacy fallback for MongoDB URI (prefer `MONGODB_URI`) |
-| `MONGODB_DB` | No | Database name (default: `UserTest`) |
-| `MONGODB_AUTH_SOURCE` | No | Auth DB if your user isn't on the default auth DB |
-| `groq_api` | Yes | Groq API key |
-| `GROQ_MODEL` | No | Model name (default: `llama-3.1-8b-instant`) |
-| `PORT` | No | Flask port (default: `5000`) |
-| `FLASK_DEBUG` | No | Set `1` to enable debug (default: `1`) |
+| Variable              | Required | Description                                            |
+| --------------------- | -------: | ------------------------------------------------------ |
+| `MONGODB_URI`         |      Yes | MongoDB connection string (recommended)                |
+| `connec_string`       |       No | Legacy fallback for MongoDB URI (prefer `MONGODB_URI`) |
+| `MONGODB_DB`          |       No | Database name (default: `UserTest`)                    |
+| `MONGODB_AUTH_SOURCE` |       No | Auth DB if your user isn't on the default auth DB      |
+| `groq_api`            |      Yes | Groq API key                                           |
+| `GROQ_MODEL`          |       No | Model name (default: `llama-3.1-8b-instant`)           |
+| `PORT`                |       No | Flask port (default: `5000`)                           |
+| `FLASK_DEBUG`         |       No | Set `1` to enable debug (default: `1`)                 |
 
 ### Frontend (`frontend/.env`)
 
-| Variable | Required | Description |
-|---|---:|---|
-| `VITE_API_BASE_URL` | No | Backend URL (default: `http://localhost:5000`) |
+| Variable            | Required | Description                                    |
+| ------------------- | -------: | ---------------------------------------------- |
+| `VITE_API_BASE_URL` |       No | Backend URL (default: `http://localhost:5000`) |
 
 ## API endpoints (backend)
 
@@ -296,9 +294,8 @@ Never commit secrets. Keep API keys and database URIs in `.env` files and rotate
 
 ## Team
 
-- Siri Karra - `heyysiri`
-- Aditya Donapati - `adonapati`
-- Manogna Vadla - `manognavadla`
+Rohan Kapadi - `rohan-kapadi` (https://github.com/rohan-kapadi)  
+Kajal Jain - `kajaljain0820` (https://github.com/kajaljain0820)
 
 ## Support
 
