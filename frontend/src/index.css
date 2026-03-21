@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   CSS CUSTOM PROPERTIES
+   ========================================= */
+:root {
+  --color-gold: #F5A623;
+  --color-gold-dim: rgba(245, 166, 35, 0.15);
+  --color-teal: #00E5A0;
+  --color-danger: #FF4D6D;
+  --color-bg-deep: #0A0A1A;
+  --color-bg-mid: #0F0A2A;
+  --color-surface: rgba(255, 255, 255, 0.05);
+  --color-surface-hover: rgba(255, 255, 255, 0.09);
+  --color-border: rgba(245, 166, 35, 0.2);
+  --color-border-hover: rgba(245, 166, 35, 0.5);
+}
+
+/* =========================================
+   BASE STYLES
+   ========================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #0A0A1A 0%, #0F0A2A 40%, #1A0A3A 100%);
+  background-attachment: fixed;
+  color: white;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   SCROLLBAR STYLING
+   ========================================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 166, 35, 0.35);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 166, 35, 0.65);
+}
+
+/* =========================================
+   GLASS CARD COMPONENT
+   ========================================= */
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md border rounded-2xl;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(245, 166, 35, 0.18);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(245, 166, 35, 0.35);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px rgba(245,166,35,0.08), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+  }
+
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #F5A623 0%, #FFD700 50%, #F5A623 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    @apply font-semibold px-8 py-3 rounded-xl text-black transition-all duration-300;
+    background: linear-gradient(135deg, #F5A623, #FFD700);
+    box-shadow: 0 4px 20px rgba(245, 166, 35, 0.4);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 6px 30px rgba(245, 166, 35, 0.7);
+    transform: translateY(-1px);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    transform: none;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .btn-ghost {
+    @apply font-medium px-6 py-2 rounded-xl border transition-all duration-300;
+    border-color: rgba(245, 166, 35, 0.4);
+    color: #F5A623;
+  }
+  .btn-ghost:hover {
+    background: rgba(245, 166, 35, 0.1);
+    border-color: rgba(245, 166, 35, 0.7);
+  }
+
+  .tag-success {
+    @apply text-xs font-semibold px-2 py-0.5 rounded-full;
+    background: rgba(0, 229, 160, 0.15);
+    color: #00E5A0;
+    border: 1px solid rgba(0, 229, 160, 0.3);
+  }
+
+  .tag-danger {
+    @apply text-xs font-semibold px-2 py-0.5 rounded-full;
+    background: rgba(255, 77, 109, 0.15);
+    color: #FF4D6D;
+    border: 1px solid rgba(255, 77, 109, 0.3);
+  }
+
+  .tag-warning {
+    @apply text-xs font-semibold px-2 py-0.5 rounded-full;
+    background: rgba(245, 166, 35, 0.15);
+    color: #F5A623;
+    border: 1px solid rgba(245, 166, 35, 0.3);
+  }
+
+  .section-enter {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .section-enter.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   PARTICLE CANVAS
+   ========================================= */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =========================================
+   DRAG & DROP ZONES
+   ========================================= */
+.drop-zone {
+  border: 2px dashed rgba(245, 166, 35, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: rgba(245, 166, 35, 0.7);
+  background: rgba(245, 166, 35, 0.05);
+  box-shadow: 0 0 20px rgba(245, 166, 35, 0.1);
+}
+.drop-zone.has-file {
+  border-color: rgba(0, 229, 160, 0.5);
+  background: rgba(0, 229, 160, 0.05);
+}
+
+/* =========================================
+   TERMINAL / AI REASONING LOG
+   ========================================= */
+.terminal-log {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0, 10, 4, 0.75);
+  border: 1px solid rgba(0, 229, 160, 0.25);
+  border-radius: 12px;
+}
+.terminal-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+  animation: fadeInLine 0.4s ease-out forwards;
+  opacity: 0;
+}
+@keyframes fadeInLine {
+  to { opacity: 1; }
+}
+.terminal-prompt {
+  color: #00E5A0;
+  flex-shrink: 0;
+}
+.terminal-text {
+  color: rgba(0, 229, 160, 0.88);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* =========================================
+   TOAST
+   ========================================= */
+.adaptiq-toast {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 99999;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  background: rgba(10, 10, 26, 0.92);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+}
+.adaptiq-toast-enter {
+  animation: adaptiqToastIn 220ms ease-out forwards;
+}
+.adaptiq-toast-leave {
+  animation: adaptiqToastOut 220ms ease-in forwards;
+}
+@keyframes adaptiqToastIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+@keyframes adaptiqToastOut {
+  from { opacity: 1; transform: translateY(0)   scale(1); }
+  to   { opacity: 0; transform: translateY(-8px) scale(0.98); }
+}
+
+/* =========================================
+   PROGRESS TOP BAR
+   ========================================= */
+#top-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #F5A623, #FFD700, #00E5A0);
+  z-index: 9999;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+}
+
+/* =========================================
+   TIMELINE LINE
+   ========================================= */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(245,166,35,0.1), rgba(245,166,35,0.6), rgba(0,229,160,0.4), rgba(0,229,160,0.1));
+  transform: translateX(-50%);
+}
+
+/* =========================================
+   RADIAL GRADIENT BACKGROUND MESH
+   ========================================= */
+.bg-mesh {
+  background: 
+    radial-gradient(ellipse at 15% 50%, rgba(120, 40, 200, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(245, 166, 35, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 90%, rgba(0, 229, 160, 0.08) 0%, transparent 50%),
+    linear-gradient(135deg, #0A0A1A 0%, #0F0A2A 40%, #1A0A3A 100%);
+}
+
+/* =========================================
+   TOOLTIP
+   ========================================= */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10,10,26,0.95);
+  border: 1px solid rgba(245,166,35,0.3);
+  color: white;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 100;
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+/* =========================================
+   SKILL BAR ANIMATIONS
+   ========================================= */
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0s;
+}
+.skill-bar-fill.animated {
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* =========================================
+   CIRCULAR PROGRESS RING
+   ========================================= */
+.progress-ring-circle {
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* =========================================
+   ACCORDION TRANSITIONS
+   ========================================= */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.accordion-content.open {
+  max-height: 2000px;
+}
+
+/* =========================================
+   FILE INPUT HIDDEN
+   ========================================= */
+input[type="file"] {
+  display: none;
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 768px) {
+  .glass-card {
+    @apply rounded-xl;
+  }
+}
+
+/* =========================================
+   DIAGNOSTIC QUIZ
+   ========================================= */
+
+/* Answer option cards */
+.quiz-option {
+  transform: translateY(0);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, color 0.2s ease;
+}
+.quiz-option:not(:disabled):hover {
+  transform: translateY(-1px);
+  background: rgba(139, 92, 246, 0.08) !important;
+  border-color: rgba(139, 92, 246, 0.35) !important;
+}
+
+/* Bounce animation for celebration emoji */
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-18px); }
+  60%       { transform: translateY(-10px); }
+}
+.animate-bounce-slow {
+  animation: bounceSlow 1.6s ease-in-out infinite;
+}
+
+/* Subtle pulse glow for the "Generate Quiz" button */
+@keyframes violetPulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(139,92,246,0.4); }
+  50%       { box-shadow: 0 4px 36px rgba(139,92,246,0.7); }
+}
+.btn-violet-pulse {
+  animation: violetPulse 2.4s ease-in-out infinite;
+}
