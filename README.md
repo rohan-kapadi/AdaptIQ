@@ -2,7 +2,7 @@
   <img src="frontend/src/assets/Logo.png" alt="AdaptIQ logo" width="120" />
 </p>
 
-<h1 align="center">AdaptIQ (SKANA)</h1>
+<h1 align="center">AdaptIQ</h1>
 
 <p align="center">Skill Gap Analyzer + Adaptive Upskilling Roadmap</p>
 
@@ -281,16 +281,6 @@ From `frontend/`:
 
 - Frontend: deploy `frontend/` as a Vite app; set `VITE_API_BASE_URL` to your backend URL.
 - Backend: `backend/vercel.json` is configured for `@vercel/python`; set `MONGODB_URI` and `groq_api` in Vercel environment variables.
-
-## Troubleshooting
-
-- Auth endpoints return `503`: MongoDB is unreachable; verify `MONGODB_URI`, network access, and IP allowlist (Atlas).
-- "Invalid MONGODB_URI" / multiple `@`: URL-encode special characters in your password (for example `@` -> `%40`).
-- CORS / API not reachable: ensure `VITE_API_BASE_URL` points to the backend and the backend is running on the expected port.
-
-## Security note
-
-Never commit secrets. Keep API keys and database URIs in `.env` files and rotate any credentials that were previously exposed.
 
 ## Team
 
