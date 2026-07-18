@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: adaptiq-backend
+    env: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: groq_api
+        sync: false
+      - key: MONGODB_DB
+        value: UserTest
+      - key: PYTHON_VERSION
+        value: 3.11.0
