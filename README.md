@@ -135,6 +135,8 @@ sequenceDiagram
 }
 ```
 
+
+
 ## Project structure (detailed)
 
 ```text
@@ -284,8 +286,7 @@ From `frontend/`:
 
 ## Team
 
-Rohan Kapadi - `rohan-kapadi` (https://github.com/rohan-kapadi)  
-Kajal Jain - `kajaljain0820` (https://github.com/kajaljain0820)
+Rohan Kapadi - `rohan-kapadi` (https://github.com/rohan-kapadi)
 
 ## Support
 

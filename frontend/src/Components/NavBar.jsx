@@ -14,6 +14,8 @@ function NavBar() {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+
+  
   const handleAnalyze = () => {
     navigate(getAuthenticated() ? '/analyze' : '/signin');
   };

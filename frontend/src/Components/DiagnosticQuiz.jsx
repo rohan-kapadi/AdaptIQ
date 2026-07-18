@@ -10,6 +10,8 @@ const DIFF_COLORS = {
   Hard:   { bg: 'rgba(255,77,109,0.15)', color: '#FF4D6D', border: 'rgba(255,77,109,0.3)' },
 };
 
+
+
 const TIMER_SECONDS = 30;
 
 // ─── Timer Bar ────────────────────────────────────────────────────────────────

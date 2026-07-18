@@ -21,6 +21,8 @@ function Profile() {
     fetchTagline();
     fetchSkills();
   }, []);
+
+  
   const fetchUserName = () => {
     const userString = localStorage.getItem('user');
     if (userString) {

@@ -21,6 +21,8 @@ export function SkillsVisualization({ analysisResult }) {
     return () => observer.disconnect();
   }, []);
 
+
+  
   if (!analysisResult) return null;
 
   const {

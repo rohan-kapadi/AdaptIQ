@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../utils/api';
-
+import logo from '../assets/Logo.png';
 const FormInput = ({ label, id, type = 'text', placeholder, value, onChange, required }) => (
   <div>
     <label htmlFor={id} className="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wider">
@@ -70,16 +70,16 @@ function SignUp() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black text-black"
-              style={{ background: 'linear-gradient(135deg, #F5A623, #8B5CF6)' }}
-            >
-              S
-            </div>
+          <Link to="/" className="inline-flex items-center gap-2.5 group">
+            <img
+              src={logo}
+              alt="AdaptIQ logo"
+              className="w-10 h-10 object-contain rounded-lg transition-transform duration-200 group-hover:scale-105"
+              style={{ filter: 'drop-shadow(0 0 6px rgba(245,166,35,0.4))' }}
+            />
             <span className="text-2xl font-extrabold">
-              <span className="gold-gradient-text">SK</span>
-              <span className="text-white">ANA</span>
+              <span className="gold-gradient-text">Adapt</span>
+              <span className="text-white">IQ</span>
             </span>
           </Link>
           <p className="text-gray-500 text-sm mt-3">Create your free account</p>

@@ -17,6 +17,8 @@ import certifi
 from dotenv import load_dotenv
 from pymongo.errors import InvalidURI
 
+
+
 app = Flask(__name__)
 CORS(app)
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), ".env"))

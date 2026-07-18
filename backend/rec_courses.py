@@ -4,6 +4,8 @@ def recommend_course(input_skill, num_of_rec=1):
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.metrics.pairwise import cosine_similarity
 
+
+
     # Load your dataset
     df = pd.read_csv("sampled_data.csv")
 

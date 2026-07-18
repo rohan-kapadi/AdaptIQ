@@ -1,0 +1,2 @@
+We are looking for a software engineer. Required skills: Python, React, Docker, Kubernetes, and AWS. Must have good communication skills.
+

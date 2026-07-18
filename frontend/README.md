@@ -6,3 +6,4 @@ This folder contains the AdaptIQ web UI.
 - Configure API base URL in `frontend/.env` (see `frontend/.env.example`)
 
 Project overview and full setup instructions live in the root `README.md`.
+

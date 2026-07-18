@@ -36,6 +36,8 @@ function ParticleCanvas() {
       });
     }
 
+
+    
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p, i) => {

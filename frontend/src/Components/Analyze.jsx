@@ -97,6 +97,8 @@ function DropZone({ label, icon, file, onFile, accept = '.pdf,.doc,.docx' }) {
       onDrop={handleDrop}
       onClick={() => inputRef.current?.click()}
     >
+
+      
       <input
         ref={inputRef}
         type="file"
